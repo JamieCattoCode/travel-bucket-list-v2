@@ -1,4 +1,5 @@
 import React from 'react';
+import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import {
   Home,
@@ -15,6 +16,7 @@ const App = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
+      <CssBaseline />
       <Routes>
         <Route path="/" element={Home()} />
         <Route exact path="/explore" element={Explore()} />
