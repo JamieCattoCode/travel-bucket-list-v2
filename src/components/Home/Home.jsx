@@ -3,7 +3,7 @@ import { List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
-import video from '../../videos/video-1.mp4';
+import video from '../../assets/video-1.mp4';
 
 const listItemStyles = {
   textAlign: 'center',
@@ -14,7 +14,7 @@ const listItemStyles = {
   },
 };
 
-const Home = () => {
+const Home = ({ user }) => {
   const classes = useStyles();
   return (
     <div className={classes.homePage}>
@@ -31,12 +31,12 @@ const Home = () => {
         sx={{ mt: 4, display: 'flex' }}
       >
         <ListItem sx={listItemStyles}>
-          <Link className={classes.link} to="/explore">
+          <Link to="/explore" className={classes.link}>
             <ListItemText primary="Explore" />
           </Link>
         </ListItem>
         <ListItem sx={listItemStyles}>
-          <Link className={classes.link} to="/profile">
+          <Link className={classes.link} to={user ? '/profile' : '/signup'}>
             <ListItemText primary="Profile" />
           </Link>
         </ListItem>

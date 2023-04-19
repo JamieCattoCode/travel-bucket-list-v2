@@ -1,5 +1,7 @@
 import { makeStyles } from '@mui/styles';
 
+const linkTransform = 'scale(1.05)';
+
 export default makeStyles(() => ({
   homePage: {
     color: 'white',
@@ -31,5 +33,11 @@ export default makeStyles(() => ({
   link: {
     textDecoration: 'none',
     color: 'inherit',
+    '&:hover': {
+      transform: linkTransform,
+    },
+    '&:focus': {
+      transform: linkTransform,
+    },
   },
 }));

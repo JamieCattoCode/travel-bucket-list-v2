@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Avatar, Box, Paper, Typography, TextField, Button } from '@mui/material';
+import { Avatar, Box, Typography, Grid, TextField, Button, Paper } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
+import register from '../../requests/register';
 import useStyles from './styles';
-import login from '../../requests/login';
 
-const Login = () => {
+const Signup = () => {
   const initialState = {
     fields: {
       username: '',
@@ -28,7 +28,13 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(await login(fields));
+    console.log(fields);
+    try {
+      const res = await register(fields);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -60,29 +66,42 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" sx={{ mt: 1 }}>
-            Sign in
+            Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ p: 3, mt: 1 }}>
+          <Box className={classes.signupForm} component="form" noValidate onSubmit={handleSubmit} sx={{ p: 3, mt: 3 }}>
             <TextField
               margin="normal"
               required
-              fullWidth
-              id="username"
+              className={classes.textField}
               label="Username"
               name="username"
-              autoComplete="username"
-              // autoFocus
+              fullWidth
+              autoFocus
+              // autoComplete="username"
               onChange={handleFieldChange}
             />
             <TextField
               margin="normal"
               required
+              className={classes.textField}
+              label="Email Address"
+              name="email"
+              id="outlined-required"
+              type="email"
               fullWidth
-              name="password"
+              autoComplete="email"
+              onChange={handleFieldChange}
+            />
+            <TextField
+              margin="normal"
+              requiredsx={{ mt: 3 }}
+              className={classes.textField}
               label="Password"
+              name="password"
+              id="outlined-required"
               type="password"
-              id="password"
-              autoComplete="current-password"
+              fullWidth
+              autoComplete="new-password"
               onChange={handleFieldChange}
             />
             <Button
@@ -93,12 +112,12 @@ const Login = () => {
               className={classes.submit}
               sx={{ mt: 4 }}
             >
-              Sign In
+              Sign Up
             </Button>
             <Grid container className={classes.signinLinkGrid}>
               <Grid item marginTop="20px">
-                <Link className={classes.link} to="/signup">
-                  Don&apos;t have an account yet? Sign up free!
+                <Link className={classes.link} to="/login">
+                  Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
@@ -109,4 +128,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
