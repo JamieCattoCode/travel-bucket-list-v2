@@ -1,23 +1,53 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Avatar, Box, Typography, Grid, TextField, Button, Paper } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Avatar, Box, Typography, Grid, TextField, Button, Paper, Alert } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Cookie from 'js-cookie';
 
 import register from '../../requests/register';
 import useStyles from './styles';
 
-const Signup = () => {
+const Signup = ({ setSuccessfulLoginProps }) => {
   const initialState = {
     fields: {
       username: '',
       email: '',
       password: '',
     },
+
+    alertProps: {
+      appears: false,
+      severity: '',
+      message: '',
+    },
   };
 
   const classes = useStyles();
 
+  const navigate = useNavigate();
+
   const [fields, setFields] = useState(initialState.fields);
+  const [alertProps, setAlertProps] = useState(initialState.alertProps);
+
+  useEffect(() => {
+    const userToken = Cookie.get('userToken');
+    if (userToken) {
+      navigate('/profile');
+    }
+  }, []);
+
+  useEffect(() => {
+    const renavigateOnSuccessfulLogin = () => {
+      if (alertProps.severity === 'success') {
+        setSuccessfulLoginProps({
+          alertProps,
+          eventType: 'signup',
+        });
+        navigate('/login-success');
+      }
+    };
+    renavigateOnSuccessfulLogin();
+  }, [alertProps]);
 
   const handleFieldChange = (event) => {
     setFields({
@@ -28,12 +58,19 @@ const Signup = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(fields);
-    try {
-      const res = await register(fields);
-      console.log(res);
-    } catch (e) {
-      console.log(e);
+    const response = await register(fields);
+    if (response.success) {
+      setAlertProps({
+        appears: true,
+        severity: 'success',
+        message: 'Login successful!',
+      });
+    } else {
+      setAlertProps({
+        appears: true,
+        severity: 'error',
+        message: response.message,
+      });
     }
   };
 
@@ -68,6 +105,15 @@ const Signup = () => {
           <Typography component="h1" variant="h5" sx={{ mt: 1 }}>
             Sign up
           </Typography>
+          {alertProps.appears && (
+          <Grid container className={classes.alertGrid}>
+            <Grid item>
+              <Alert severity={alertProps.severity} sx={{ width: 'fit-content', mt: 3 }}>
+                {alertProps.message}
+              </Alert>
+            </Grid>
+          </Grid>
+          )}
           <Box className={classes.signupForm} component="form" noValidate onSubmit={handleSubmit} sx={{ p: 3, mt: 3 }}>
             <TextField
               margin="normal"

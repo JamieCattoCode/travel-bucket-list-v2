@@ -5,3 +5,4 @@ export { default as Favourites } from './Favourites/Favourites';
 export { default as Login } from './Login/Login';
 export { default as TripDetail } from './TripDetail/TripDetail';
 export { default as Signup } from './Login/Signup';
+export { default as SuccessfulLogin } from './SuccessfulLogin/SuccessfulLogin';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import Cookie from 'js-cookie';
@@ -12,38 +12,52 @@ import {
   TripDetail,
   Favourites,
   Signup,
+  SuccessfulLogin,
 } from '.';
 
 import useStyles from './styles';
 
 const App = () => {
   const classes = useStyles();
-  const [user, setUser] = useState(null);
+
   const userToken = Cookie.get('userToken');
 
-  const UserContext = createContext(user);
+  const initialState = {
+    successfulLoginProps: {
+      alertProps: {},
+      eventType: '',
+    },
+  };
 
-  // useEffect(() => {
-  //   if (userToken) {
-  //     const currentUser = jwtDecode(userToken);
-  //     setUser(currentUser);
-  //   }
-  // }, []);
+  const [successfulLoginProps, setSuccessfulLoginProps] = useState(initialState.successfulLoginProps);
+  const { alertProps: alertPropsState, eventType: eventTypeState } = successfulLoginProps;
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (userToken) {
+      const currentUser = jwtDecode(userToken);
+      setUser(currentUser);
+    }
+  }, []);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {/* <UserContext.Provider value={user}> */}
       <Routes>
         <Route path="/" element={<Home user={user} />} />
         <Route exact path="/explore" element={Explore()} />
-        <Route exact path="/profile" element={Profile()} />
-        <Route exact path="/signup" element={Signup()} />
-        <Route exact path="/login" element={Login()} />
+        <Route exact path="/profile" element=<Profile user={user} /> />
+        <Route exact path="/signup" element={<Signup setSuccessfulLoginProps={setSuccessfulLoginProps} />} />
+        <Route exact path="/login" element=<Login setSuccessfulLoginProps={setSuccessfulLoginProps} /> />
+        <Route
+          exact
+          path="/login-success"
+          element=<SuccessfulLogin alertProps={alertPropsState} eventType={eventTypeState} />
+        />
         <Route exact path="/favourites" element={Favourites()} />
         <Route exact path="/trip/:id" element={TripDetail()} />
       </Routes>
-      {/* </UserContext.Provider> */}
     </div>
   );
 };

@@ -18,6 +18,7 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 0,
+    'react/destructuring-assignment': 1,
     'import/extensions': 0,
     'react/prop-types': 0,
     'linebreak-style': 0,

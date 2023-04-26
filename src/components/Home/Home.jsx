@@ -16,6 +16,7 @@ const listItemStyles = {
 
 const Home = ({ user }) => {
   const classes = useStyles();
+
   return (
     <div className={classes.homePage}>
       <video src={video} className={classes.bgVideo} autoPlay loop muted />
