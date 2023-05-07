@@ -47,7 +47,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home user={user} />} />
         <Route exact path="/explore" element={Explore()} />
-        <Route exact path="/profile" element=<Profile user={user} /> />
+        <Route exact path="/profile" element=<Profile user={user} setUser={setUser} /> />
         <Route exact path="/signup" element={<Signup setSuccessfulLoginProps={setSuccessfulLoginProps} />} />
         <Route exact path="/login" element=<Login setSuccessfulLoginProps={setSuccessfulLoginProps} /> />
         <Route
