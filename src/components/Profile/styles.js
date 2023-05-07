@@ -1,14 +1,20 @@
 import { makeStyles } from '@mui/styles';
 
+const linkTransform = 'scale(1.05)';
+
 export default makeStyles((theme) => ({
-  gridContainer: {
+  profilePage: {
     backgroundColor: 'black',
     color: 'white',
+  },
+
+  gridContainer: {
     justifyContent: 'center',
     fontFamily: '"Golos Text", sans-serif',
   },
 
   profileHeader: {
+    marginTop: '2rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -27,4 +33,24 @@ export default makeStyles((theme) => ({
       height: 'auto',
     },
   },
+
+  linkList: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+  },
+
+  link: {
+    textDecoration: 'none',
+    cursor: 'pointer',
+    color: 'inherit',
+    '&:hover': {
+      transform: linkTransform,
+    },
+    '&:focus': {
+      transform: linkTransform,
+    },
+  },
+
 }));

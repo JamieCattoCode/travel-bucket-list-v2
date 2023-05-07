@@ -25,7 +25,7 @@ const Home = ({ user }) => {
         className={classes.helloTraveller}
         align="center"
         variant="h4"
-      >Hello Traveller... Time to Explore!
+      >Hello {user ? user.username : 'Traveller'}... Time to Explore!
       </Typography>
       <List
         className={classes.linkList}

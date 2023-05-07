@@ -36,7 +36,7 @@ const App = () => {
 
   useEffect(() => {
     if (userToken) {
-      const currentUser = jwtDecode(userToken);
+      const { user: currentUser } = jwtDecode(userToken);
       setUser(currentUser);
     }
   }, []);
@@ -46,17 +46,17 @@ const App = () => {
       <CssBaseline />
       <Routes>
         <Route path="/" element={<Home user={user} />} />
-        <Route exact path="/explore" element={Explore()} />
-        <Route exact path="/profile" element=<Profile user={user} setUser={setUser} /> />
+        <Route exact path="/explore" element={<Explore />} />
+        <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />} />
         <Route exact path="/signup" element={<Signup setSuccessfulLoginProps={setSuccessfulLoginProps} />} />
-        <Route exact path="/login" element=<Login setSuccessfulLoginProps={setSuccessfulLoginProps} /> />
+        <Route exact path="/login" element={<Login setSuccessfulLoginProps={setSuccessfulLoginProps} />} />
         <Route
           exact
           path="/login-success"
-          element=<SuccessfulLogin alertProps={alertPropsState} eventType={eventTypeState} />
+          element={<SuccessfulLogin alertProps={alertPropsState} eventType={eventTypeState} />}
         />
-        <Route exact path="/favourites" element={Favourites()} />
-        <Route exact path="/trip/:id" element={TripDetail()} />
+        <Route exact path="/favourites" element={<Favourites />} />
+        <Route exact path="/trip/:id" element={<TripDetail />} />
       </Routes>
     </div>
   );
