@@ -5,6 +5,8 @@ import { Box, Avatar, Typography, List, ListItem, ListItemText } from '@mui/mate
 import Cookie from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 
+import useJwtCookie from '../../hooks/useJwtCookie';
+
 import useStyles from './styles';
 import profilePic from '../../assets/profile-pic.jpg';
 
@@ -17,19 +19,12 @@ const listItemStyles = {
   },
 };
 
-const Profile = ({ user, setUser }) => {
+const Profile = () => {
   const classes = useStyles();
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userToken = Cookie.get('userToken');
-    if (userToken) {
-      const { user: currentUser } = jwtDecode(userToken);
-      console.log(currentUser);
-      setUser(currentUser);
-    }
-  }, []);
+  const { user } = useJwtCookie('userToken');
 
   const handleLogout = () => {
     Cookie.remove('userToken');
