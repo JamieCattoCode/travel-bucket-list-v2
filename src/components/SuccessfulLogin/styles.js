@@ -1,11 +1,23 @@
 import { makeStyles } from '@mui/styles';
 
 export default makeStyles((theme) => ({
+  bgVideo: {
+    height: '100vh',
+    width: '100vw',
+    objectFit: 'fill',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
+  },
+
   gridContainer: {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: 'black',
     color: 'white',
+    fontFamily: '"Golos Text", sans-serif',
   },
 
   contentGrid: {
@@ -35,6 +47,7 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     margin: '1rem 0',
     marginBottom: '2rem',
+    fontFamily: 'inherit',
   },
 
   welcomeText: {

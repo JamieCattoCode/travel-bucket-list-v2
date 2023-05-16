@@ -17,21 +17,35 @@ import RequireAuth from './RequireAuth/RequireAuth';
 import useJwtCookie from '../hooks/useJwtCookie';
 
 import useStyles from './styles';
+import getUserById from '../requests/getUserById';
 
 const App = () => {
   const classes = useStyles();
 
+  
   const initialState = {
     successfulLoginProps: {
       alertProps: {},
       eventType: '',
     },
   };
-
+  
   const [successfulLoginProps, setSuccessfulLoginProps] = useState(initialState.successfulLoginProps);
   const { alertProps: alertPropsState, eventType: eventTypeState } = successfulLoginProps;
-
-  const { user } = useJwtCookie('userToken');
+  
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    const setUserFromToken = async () => {
+      const userToken = Cookie.get('userToken');
+      if (userToken) {
+        const { userId } = (jwtDecode(userToken))
+        setUser(await getUserById(userId))
+        console.log(user)
+      }
+    }
+    setUserFromToken();
+  }, []);
 
   return (
     <div className={classes.root}>

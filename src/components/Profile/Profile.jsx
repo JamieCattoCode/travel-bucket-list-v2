@@ -24,13 +24,17 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  const { user } = useJwtCookie('userToken');
-
   const handleLogout = () => {
     Cookie.remove('userToken');
     setUser(null);
     navigate('/');
   };
+
+  if (!user) {
+    return (
+      <h1>Loading...</h1>
+    )
+  }
 
   return (
     <Box className={classes.profilePage} sx={{ height: '105vh' }}>
