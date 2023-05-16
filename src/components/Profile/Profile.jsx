@@ -4,7 +4,11 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { Box, Avatar, Typography, List, ListItem, ListItemText } from '@mui/material';
 import Cookie from 'js-cookie';
 
+import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
+
 import useStyles from './styles';
+
+import video from '../../assets/video-1.mp4';
 import profilePic from '../../assets/profile-pic.jpg';
 
 const listItemStyles = {
@@ -34,7 +38,8 @@ const Profile = ({ user, setUser }) => {
   }
 
   return (
-    <Box className={classes.profilePage} sx={{ height: '105vh' }}>
+    <div className={classes.profilePage}>
+      <BackgroundVideo />
       <Grid container className={classes.gridContainer} rowSpacing={1}>
         <Grid className={classes.profileHeader} xs={9} md={8}>
           <Avatar
@@ -72,7 +77,7 @@ const Profile = ({ user, setUser }) => {
           </List>
         </Grid>
       </Grid>
-    </Box>
+    </div>
   );
 };
 

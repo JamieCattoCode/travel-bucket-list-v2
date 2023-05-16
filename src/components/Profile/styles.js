@@ -4,7 +4,6 @@ const linkTransform = 'scale(1.05)';
 
 export default makeStyles((theme) => ({
   profilePage: {
-    backgroundColor: 'black',
     color: 'white',
   },
 
@@ -14,7 +13,7 @@ export default makeStyles((theme) => ({
   },
 
   profileHeader: {
-    marginTop: '2rem',
+    marginTop: '5rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -32,6 +31,7 @@ export default makeStyles((theme) => ({
       width: '100px',
       height: 'auto',
     },
+    marginBottom: '1.2rem'
   },
 
   linkList: {

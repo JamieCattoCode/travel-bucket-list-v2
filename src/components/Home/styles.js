@@ -7,18 +7,6 @@ export default makeStyles(() => ({
     color: 'white',
   },
 
-  bgVideo: {
-    height: '100vh',
-    width: '100vw',
-    objectFit: 'fill',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: -1,
-  },
-
   helloTraveller: {
     fontFamily: '"Golos Text", sans-serif',
   },
