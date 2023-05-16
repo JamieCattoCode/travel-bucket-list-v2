@@ -16,29 +16,34 @@ import {
 } from '.';
 
 import useStyles from './styles';
+import getUserById from '../requests/getUserById';
 
 const App = () => {
   const classes = useStyles();
 
-  const userToken = Cookie.get('userToken');
-
+  
   const initialState = {
     successfulLoginProps: {
       alertProps: {},
       eventType: '',
     },
   };
-
+  
   const [successfulLoginProps, setSuccessfulLoginProps] = useState(initialState.successfulLoginProps);
   const { alertProps: alertPropsState, eventType: eventTypeState } = successfulLoginProps;
-
+  
   const [user, setUser] = useState(null);
-
+  
   useEffect(() => {
-    if (userToken) {
-      const { user: currentUser } = jwtDecode(userToken);
-      setUser(currentUser);
+    const setUserFromToken = async () => {
+      const userToken = Cookie.get('userToken');
+      if (userToken) {
+        const { userId } = (jwtDecode(userToken))
+        setUser(await getUserById(userId))
+        console.log(user)
+      }
     }
+    setUserFromToken();
   }, []);
 
   return (

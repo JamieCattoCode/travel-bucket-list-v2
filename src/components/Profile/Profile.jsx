@@ -22,20 +22,17 @@ const Profile = ({ user, setUser }) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userToken = Cookie.get('userToken');
-    if (userToken) {
-      const { user: currentUser } = jwtDecode(userToken);
-      console.log(currentUser);
-      setUser(currentUser);
-    }
-  }, []);
-
   const handleLogout = () => {
     Cookie.remove('userToken');
     setUser(null);
     navigate('/');
   };
+
+  if (!user) {
+    return (
+      <h1>Loading...</h1>
+    )
+  }
 
   return (
     <Box className={classes.profilePage} sx={{ height: '105vh' }}>

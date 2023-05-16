@@ -7,7 +7,7 @@ import Cookie from 'js-cookie';
 import useStyles from './styles';
 import login from '../../requests/login';
 
-const Login = ({ setSuccessfulLoginProps }) => {
+const Login = ({ setSuccessfulLoginProps, setUser }) => {
   const initialState = {
     fields: {
       username: '',
@@ -60,6 +60,7 @@ const Login = ({ setSuccessfulLoginProps }) => {
     event.preventDefault();
     const response = await login(fields);
     if (response.success) {
+      console.log(response)
       setAlertProps({
         appears: true,
         severity: 'success',
