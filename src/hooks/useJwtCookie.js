@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
-
 import Cookie from 'js-cookie';
 import jwtDecode from 'jwt-decode';
+import getUserById from "../requests/getUserById";
 
-const useJwtCookie = (tokenName) => {
+const useJwtCookie = async (tokenName, setter) => {
 
-    const [ userId, setUserId ] = useState(null)
+    token = Cookie.get(tokenName);
+    if (token) {
+        const { userId } = (jwtDecode(userToken))
+        const fullUser = getUserById(userId)
+        setter(fullUser)
+    }
 
-    useEffect(() => {
-        const userToken = Cookie.get(tokenName);
-        if (userToken) {
-            const {userId: userIdFromCookie} = jwtDecode(userToken);
-            console.log(userIdFromCookie)
-            setUserId(userIdFromCookie)
-        }
-    }, []);
-
-    return { userId };
 };
 
 export default useJwtCookie;

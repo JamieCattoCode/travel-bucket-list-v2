@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 
+import Cookie from 'js-cookie';
+import jwtDecode from 'jwt-decode';
+
 import {
   Home,
   Explore,
@@ -41,7 +44,6 @@ const App = () => {
       if (userToken) {
         const { userId } = (jwtDecode(userToken))
         setUser(await getUserById(userId))
-        console.log(user)
       }
     }
     setUserFromToken();
@@ -56,7 +58,7 @@ const App = () => {
         <Route exact path="/login" element={<Login setSuccessfulLoginProps={setSuccessfulLoginProps} />} />
         <Route element={<RequireAuth />}>
           <Route exact path="/explore" element={<Explore />} />
-          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />} />
           <Route
             exact
             path="/login-success"

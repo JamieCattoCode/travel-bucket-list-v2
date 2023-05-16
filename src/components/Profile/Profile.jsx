@@ -3,9 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Box, Avatar, Typography, List, ListItem, ListItemText } from '@mui/material';
 import Cookie from 'js-cookie';
-import jwtDecode from 'jwt-decode';
-
-import useJwtCookie from '../../hooks/useJwtCookie';
 
 import useStyles from './styles';
 import profilePic from '../../assets/profile-pic.jpg';
@@ -19,7 +16,7 @@ const listItemStyles = {
   },
 };
 
-const Profile = () => {
+const Profile = ({ user, setUser }) => {
   const classes = useStyles();
 
   const navigate = useNavigate();
