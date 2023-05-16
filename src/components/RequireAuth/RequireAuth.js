@@ -2,13 +2,17 @@ import React from "react";
 import { useLocation, Navigate, Outlet } from 'react-router-dom'
 import useJwtCookie from "../../hooks/useJwtCookie";
 
-const RequireAuth = () => {
+const RequireAuth = ({ user, userId }) => {
     const location = useLocation();
 
-    const { token, user } = useJwtCookie('userToken');
+    console.log(user);
 
-    if (!(token && user)) return <Outlet />
-    else return <Navigate to="login" state={{ from: location }} replace />
+    return (
+        user || userId ?
+            <Outlet />
+            :
+            <Navigate to="/login" />
+    )
 }
 
 export default RequireAuth;
