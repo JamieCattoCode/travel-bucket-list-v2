@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           { isMobile ? (
             <IconButton
               edge="start"
@@ -31,7 +31,7 @@ const Navbar = () => {
               <Menu />
             </IconButton>
           ) : (
-            <Stack direction="row" spacing={4}>
+            <Stack direction="row" spacing={4} sx={{ flexGrow: 1 }}>
               <Link to="/" className={`${classes.iconLink} ${classes.link}`}>
                 <HomeRounded className={classes.homeIcon} />
                 <Typography variant="h6" component="h3">
@@ -65,7 +65,7 @@ const Navbar = () => {
               >
                 {isMobile && <>My Profile</>}
                 <Avatar
-                  style={{ width: 30, height: 30 }}
+                  style={{ width: 40, height: 40 }}
                   alt="Profile"
                   src={profilePic}
                 />

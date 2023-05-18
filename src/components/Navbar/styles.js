@@ -3,6 +3,11 @@ import { makeStyles } from '@mui/styles';
 const drawerWidth = '300px';
 
 export default makeStyles((theme) => ({
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+
   iconLink: {
     display: 'flex',
   },

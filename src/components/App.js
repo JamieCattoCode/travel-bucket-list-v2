@@ -10,14 +10,12 @@ import {
   Explore,
   Profile,
   Login,
-  TripDetail,
+  LocationDetail,
   Favourites,
   Signup,
   SuccessfulLogin,
 } from '.';
 import RequireAuth from './RequireAuth/RequireAuth';
-
-import useJwtCookie from '../hooks/useJwtCookie';
 
 import useStyles from './styles';
 import getUserById from '../requests/getUserById';
@@ -25,39 +23,38 @@ import getUserById from '../requests/getUserById';
 const App = () => {
   const classes = useStyles();
 
-  
   const initialState = {
     successfulLoginProps: {
       alertProps: {},
       eventType: '',
     },
   };
-  
+
   const [successfulLoginProps, setSuccessfulLoginProps] = useState(initialState.successfulLoginProps);
   const { alertProps: alertPropsState, eventType: eventTypeState } = successfulLoginProps;
-  
+
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
-  
+
   useEffect(() => {
     const setUserFromToken = async () => {
       const userToken = Cookie.get('userToken');
       if (userToken) {
-        const { userId } = (jwtDecode(userToken))
-        setUserId(userId)
-        setUser(await getUserById(userId))
+        const { userId } = (jwtDecode(userToken));
+        setUserId(userId);
+        setUser(await getUserById(userId));
       }
-    }
+    };
     setUserFromToken();
   }, []);
 
-  console.log(user)
+  console.log(user);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <Routes>
-        <Route path="/" element={<Home user={user} />}/>
+        <Route path="/" element={<Home user={user} />} />
         <Route exact path="/signup" element={<Signup setSuccessfulLoginProps={setSuccessfulLoginProps} setUserId={setUserId} />} />
         <Route exact path="/login" element={<Login setSuccessfulLoginProps={setSuccessfulLoginProps} setUserId={setUserId} />} />
         <Route element={<RequireAuth user={user} userId={userId} />}>
@@ -69,7 +66,7 @@ const App = () => {
             element={<SuccessfulLogin alertProps={alertPropsState} eventType={eventTypeState} />}
           />
           <Route exact path="/favourites" element={<Favourites />} />
-          <Route exact path="/trip/:id" element={<TripDetail />} />
+          <Route exact path="/location/:id" element={<LocationDetail />} />
         </Route>
       </Routes>
     </div>
