@@ -62,9 +62,9 @@ const Login = ({ setSuccessfulLoginProps, setUserId }) => {
     try {
       const response = await login(fields);
       if (response.success) {
-        console.log(jwtDecode(response.data.accessToken))
+        console.log(jwtDecode(response.data.accessToken));
         const currentUserId = jwtDecode(response.data.accessToken);
-        setUserId(currentUserId)
+        setUserId(currentUserId);
         setAlertProps({
           appears: true,
           severity: 'success',
@@ -77,7 +77,6 @@ const Login = ({ setSuccessfulLoginProps, setUserId }) => {
           message: response.message,
         });
       }
-      
     } catch (error) {
       setAlertProps({
         appears: true,

@@ -64,7 +64,7 @@ const Signup = ({ setSuccessfulLoginProps, setUserId }) => {
       if (response.success) {
         const loginResponse = await login({ username: fields.username, password: fields.password });
         const currentUserId = jwtDecode(loginResponse.data.accessToken);
-        setUserId(currentUserId)
+        setUserId(currentUserId);
         setAlertProps({
           appears: true,
           severity: 'success',

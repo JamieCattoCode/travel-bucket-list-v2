@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Box, Avatar, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Avatar, Typography, List, ListItem, ListItemText } from '@mui/material';
 import Cookie from 'js-cookie';
 
 import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
 
 import useStyles from './styles';
 
-import video from '../../assets/video-1.mp4';
 import profilePic from '../../assets/profile-pic.jpg';
 
 const listItemStyles = {
@@ -34,7 +33,7 @@ const Profile = ({ user, setUser }) => {
   if (!user) {
     return (
       <h1>Loading...</h1>
-    )
+    );
   }
 
   return (
@@ -45,7 +44,7 @@ const Profile = ({ user, setUser }) => {
           <Avatar
             className={classes.userProfilePic}
             src={profilePic}
-            alt={user.username}
+            alt="Avatar"
             sx={{ width: 200, height: 'auto' }}
           />
           <Typography sx={{ fontFamily: '"Golos Text", sans-serif' }} component="h1" variant="h4">
