@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Cookie from 'js-cookie';
 import jwtDecode from 'jwt-decode';
+import { AuthProvider } from '../context/AuthContext';
 
 import {
   Home,
@@ -53,22 +54,24 @@ const App = () => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Routes>
-        <Route path="/" element={<Home user={user} />} />
-        <Route exact path="/signup" element={<Signup setSuccessfulLoginProps={setSuccessfulLoginProps} setUserId={setUserId} />} />
-        <Route exact path="/login" element={<Login setSuccessfulLoginProps={setSuccessfulLoginProps} setUserId={setUserId} />} />
-        <Route element={<RequireAuth user={user} userId={userId} />}>
-          <Route exact path="/explore" element={<Explore />} />
-          <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />} />
-          <Route
-            exact
-            path="/login-success"
-            element={<SuccessfulLogin alertProps={alertPropsState} eventType={eventTypeState} />}
-          />
-          <Route exact path="/favourites" element={<Favourites />} />
-          <Route exact path="/location/:id" element={<LocationDetail />} />
-        </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Home user={user} />} />
+          <Route exact path="/signup" element={<Signup setSuccessfulLoginProps={setSuccessfulLoginProps} setUserId={setUserId} />} />
+          <Route exact path="/login" element={<Login setSuccessfulLoginProps={setSuccessfulLoginProps} setUserId={setUserId} />} />
+          <Route element={<RequireAuth />}>
+            <Route exact path="/explore" element={<Explore />} />
+            <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />} />
+            <Route
+              exact
+              path="/login-success"
+              element={<SuccessfulLogin alertProps={alertPropsState} eventType={eventTypeState} />}
+            />
+            <Route exact path="/favourites" element={<Favourites />} />
+            <Route exact path="/location/:id" element={<LocationDetail />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </div>
   );
 };

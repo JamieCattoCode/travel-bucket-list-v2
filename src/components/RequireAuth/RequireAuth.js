@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
-import useJwtCookie from '../../hooks/useJwtCookie';
 
-const RequireAuth = ({ user, userId }) => {
+import { AuthContext } from '../../context/AuthContext';
+
+const RequireAuth = () => {
+  const { user, userId, authChecked } = useContext(AuthContext);
   const location = useLocation();
 
   console.log(user);
+
+  if (!authChecked) {
+    return (
+      <h2>
+        Loading...
+      </h2>
+    );
+  }
 
   return (
     user || userId

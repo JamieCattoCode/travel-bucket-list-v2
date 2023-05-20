@@ -68,7 +68,7 @@ const getImage = async (query) => {
 
   try {
     const response = await axios.request(options);
-    console.log(response.data);
+    return response.data.value;
   } catch (error) {
     console.error(error);
   }
