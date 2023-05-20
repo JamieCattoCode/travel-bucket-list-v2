@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Grid, Avatar, Box, Paper, Typography, TextField, Button, Alert } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Cookie from 'js-cookie';
+import jwtDecode from 'jwt-decode';
 
 import useStyles from './styles';
 import login from '../../requests/login';
 
-const Login = ({ setSuccessfulLoginProps }) => {
+const Login = ({ setSuccessfulLoginProps, setUserId }) => {
   const initialState = {
     fields: {
       username: '',
@@ -58,18 +59,29 @@ const Login = ({ setSuccessfulLoginProps }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await login(fields);
-    if (response.success) {
-      setAlertProps({
-        appears: true,
-        severity: 'success',
-        message: 'Login successful!',
-      });
-    } else {
+    try {
+      const response = await login(fields);
+      if (response.success) {
+        console.log(jwtDecode(response.data.accessToken));
+        const currentUserId = jwtDecode(response.data.accessToken);
+        setUserId(currentUserId);
+        setAlertProps({
+          appears: true,
+          severity: 'success',
+          message: 'Login successful!',
+        });
+      } else {
+        setAlertProps({
+          appears: true,
+          severity: 'error',
+          message: response.message,
+        });
+      }
+    } catch (error) {
       setAlertProps({
         appears: true,
         severity: 'error',
-        message: response.message,
+        message: 'Server error.',
       });
     }
   };

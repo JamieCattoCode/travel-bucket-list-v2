@@ -2,7 +2,10 @@ import React from 'react';
 import { List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
+
 import useStyles from './styles';
+
 import video from '../../assets/video-1.mp4';
 
 const listItemStyles = {
@@ -19,7 +22,7 @@ const Home = ({ user }) => {
 
   return (
     <div className={classes.homePage}>
-      <video src={video} className={classes.bgVideo} autoPlay loop muted />
+      <BackgroundVideo />
       <Typography
         sx={{ py: 4, px: 3, mt: 5, fontFamily: '"Golos Text", sans-serif' }}
         className={classes.helloTraveller}

@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Box, Avatar, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Avatar, Typography, List, ListItem, ListItemText } from '@mui/material';
 import Cookie from 'js-cookie';
-import jwtDecode from 'jwt-decode';
+
+import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
 
 import useStyles from './styles';
+
 import profilePic from '../../assets/profile-pic.jpg';
 
 const listItemStyles = {
@@ -22,29 +24,27 @@ const Profile = ({ user, setUser }) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userToken = Cookie.get('userToken');
-    if (userToken) {
-      const { user: currentUser } = jwtDecode(userToken);
-      console.log(currentUser);
-      setUser(currentUser);
-    }
-  }, []);
-
   const handleLogout = () => {
     Cookie.remove('userToken');
     setUser(null);
     navigate('/');
   };
 
+  if (!user) {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
+
   return (
-    <Box className={classes.profilePage} sx={{ height: '105vh' }}>
+    <div className={classes.profilePage}>
+      <BackgroundVideo />
       <Grid container className={classes.gridContainer} rowSpacing={1}>
         <Grid className={classes.profileHeader} xs={9} md={8}>
           <Avatar
             className={classes.userProfilePic}
             src={profilePic}
-            alt={user.username}
+            alt="Avatar"
             sx={{ width: 200, height: 'auto' }}
           />
           <Typography sx={{ fontFamily: '"Golos Text", sans-serif' }} component="h1" variant="h4">
@@ -76,7 +76,7 @@ const Profile = ({ user, setUser }) => {
           </List>
         </Grid>
       </Grid>
-    </Box>
+    </div>
   );
 };
 

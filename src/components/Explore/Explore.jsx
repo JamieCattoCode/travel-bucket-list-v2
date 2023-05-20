@@ -1,9 +1,21 @@
 import React from 'react';
+import { Grid } from '@mui/material';
+
+import Navbar from '../Navbar/Navbar';
+import SearchBar from './SearchBar/SearchBar';
+import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
+
+import useStyles from './styles';
 
 const Explore = () => {
-  console.log('Explore');
+  const classes = useStyles();
+
   return (
-    <div>Explore</div>
+    <div className={classes.explorePage}>
+      <Navbar className={classes.navBar} />
+      <BackgroundVideo />
+      <SearchBar />
+    </div>
   );
 };
 

@@ -5,9 +5,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Cookie from 'js-cookie';
 
 import register from '../../requests/register';
+import login from '../../requests/login';
 import useStyles from './styles';
 
-const Signup = ({ setSuccessfulLoginProps }) => {
+const Signup = ({ setSuccessfulLoginProps, setUserId }) => {
   const initialState = {
     fields: {
       username: '',
@@ -58,18 +59,29 @@ const Signup = ({ setSuccessfulLoginProps }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await register(fields);
-    if (response.success) {
-      setAlertProps({
-        appears: true,
-        severity: 'success',
-        message: 'Login successful!',
-      });
-    } else {
+    try {
+      const response = await register(fields);
+      if (response.success) {
+        const loginResponse = await login({ username: fields.username, password: fields.password });
+        const currentUserId = jwtDecode(loginResponse.data.accessToken);
+        setUserId(currentUserId);
+        setAlertProps({
+          appears: true,
+          severity: 'success',
+          message: 'Login successful!',
+        });
+      } else {
+        setAlertProps({
+          appears: true,
+          severity: 'error',
+          message: response.message,
+        });
+      }
+    } catch (error) {
       setAlertProps({
         appears: true,
         severity: 'error',
-        message: response.message,
+        message: 'Server error.',
       });
     }
   };
