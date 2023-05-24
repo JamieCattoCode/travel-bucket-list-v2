@@ -70,7 +70,7 @@ const Profile = ({ user, setUser }) => {
             </ListItem>
             <ListItem sx={listItemStyles}>
               <Typography className={classes.link} onClick={handleLogout}>
-                Sign Out
+                Log Out
               </Typography>
             </ListItem>
           </List>
