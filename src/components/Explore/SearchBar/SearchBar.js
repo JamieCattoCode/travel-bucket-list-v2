@@ -8,6 +8,8 @@ import getSearchResults from '../../../requests/getSearchResults';
 
 import useStyles from './styles';
 
+const searchLimit = 20;
+
 const SearchBar = () => {
   const classes = useStyles();
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -17,7 +19,6 @@ const SearchBar = () => {
 
   const handleSubmitSearch = async (event) => {
     event.preventDefault();
-    const searchLimit = 20;
     try {
       const rawResults = await getSearchResults(query, searchLimit);
       setSearchResults(rawResults);

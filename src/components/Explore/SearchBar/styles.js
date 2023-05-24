@@ -22,6 +22,7 @@ export default makeStyles((theme) => ({
 
   textField: {
     minWidth: '80%',
+    padding: '.5rem',
   },
 
   input: {
