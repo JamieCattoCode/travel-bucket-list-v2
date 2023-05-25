@@ -13,6 +13,7 @@ import getLocationByXid from '../../requests/getLocationByXid';
 import { translate } from '../../requests/translate';
 import postFavourite from '../../requests/postFavourite';
 import deleteFavourite from '../../requests/deleteFavourite';
+import { getIsFavourite } from '../../requests/getFavourites';
 
 import useStyles from './styles';
 
@@ -45,7 +46,13 @@ const LocationDetail = () => {
         translatedDescription: translatedDescription[0],
       });
     };
+
+    const setFavouriteInitialState = async () => {
+      console.log(await getIsFavourite(userId, xid));
+      setIsFavourite(await getIsFavourite(userId, xid));
+    };
     getLocationDetails();
+    setFavouriteInitialState();
   }, []);
 
   const toggleFavourite = async () => {
