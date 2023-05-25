@@ -12,15 +12,18 @@ import Navbar from '../Navbar/Navbar';
 import getLocationByXid from '../../requests/getLocationByXid';
 import { translate } from '../../requests/translate';
 import postFavourite from '../../requests/postFavourite';
+import deleteFavourite from '../../requests/deleteFavourite';
 
 import useStyles from './styles';
 
 // Want to get images in here but struggling to find an API that can do it automatically with niche places of interest
 
-const LocationDetail = ({ userId }) => {
+const LocationDetail = () => {
   const location = useLocation();
   const { pathname: path } = location;
   const xid = path.split('/')[2];
+
+  const { userId } = useContext(AuthContext);
 
   const classes = useStyles();
 
@@ -52,13 +55,15 @@ const LocationDetail = ({ userId }) => {
       console.log(responseData);
     } else {
       setIsFavourite(false);
+      const responseData = await deleteFavourite(userId, xid);
+      console.log(responseData);
     }
   };
 
   console.log(locationDetails);
 
   return (
-    locationDetails ? (
+    (locationDetails && userId) ? (
       <>
         <Navbar />
         <BackgroundVideo />
