@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { Typography, Grid } from '@mui/material';
+import { Typography, Grid, IconButton } from '@mui/material';
+import { FavoriteBorderRounded as EmptyHeartIcon } from '@mui/icons-material';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import { AuthContext } from '../../context/AuthContext';
 
 import BackgroundVideo from '../BackgroundVideo/BackgroundVideo';
 import Navbar from '../Navbar/Navbar';
 
 import getLocationByXid from '../../requests/getLocationByXid';
 import { translate } from '../../requests/translate';
-import { getImage } from '../../requests/getImages';
+import postFavourite from '../../requests/postFavourite';
 
 import useStyles from './styles';
 
-const LocationDetail = () => {
+// Want to get images in here but struggling to find an API that can do it automatically with niche places of interest
+
+const LocationDetail = ({ userId }) => {
   const location = useLocation();
   const { pathname: path } = location;
   const xid = path.split('/')[2];
@@ -20,14 +25,13 @@ const LocationDetail = () => {
   const classes = useStyles();
 
   const [locationDetails, setLocationDetails] = useState(null);
+  const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
     const getLocationDetails = async () => {
       const { data: responseData } = await getLocationByXid(xid);
       const { name, address, wikipedia_extracts: wikipediaExtracts } = responseData;
       const [translatedDescription] = await translate(wikipediaExtracts.text);
-      console.log(translatedDescription);
-      // const image = await getImage(`${name} ${address.city} ${address.state}`);
       setLocationDetails({
         name,
         address: {
@@ -40,6 +44,16 @@ const LocationDetail = () => {
     };
     getLocationDetails();
   }, []);
+
+  const toggleFavourite = async () => {
+    if (!isFavourite) {
+      setIsFavourite(true);
+      const responseData = await postFavourite(userId, xid);
+      console.log(responseData);
+    } else {
+      setIsFavourite(false);
+    }
+  };
 
   console.log(locationDetails);
 
@@ -72,6 +86,18 @@ const LocationDetail = () => {
             <Typography variant="body1">
               {locationDetails.address.thirdLine}
             </Typography>
+            <IconButton
+              className={classes.favouriteButton}
+              color="error"
+              onClick={toggleFavourite}
+              sx={{ padding: '0', marginTop: '10px' }}
+            >
+              {isFavourite ? (
+                <FavoriteRoundedIcon />
+              ) : (
+                <EmptyHeartIcon />
+              )}
+            </IconButton>
           </Grid>
           <Grid item xs={1 / 2} md={2 / 5} />
         </Grid>
