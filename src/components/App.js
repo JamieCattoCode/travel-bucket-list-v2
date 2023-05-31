@@ -59,14 +59,14 @@ const App = () => {
           <Route path="/" element={<Home user={user} />} />
           <Route exact path="/signup" element={<Signup setSuccessfulLoginProps={setSuccessfulLoginProps} setUserId={setUserId} />} />
           <Route exact path="/login" element={<Login setSuccessfulLoginProps={setSuccessfulLoginProps} setUserId={setUserId} />} />
+          <Route
+            exact
+            path="/login-success"
+            element={<SuccessfulLogin alertProps={alertPropsState} eventType={eventTypeState} />}
+          />
           <Route element={<RequireAuth />}>
             <Route exact path="/explore" element={<Explore />} />
             <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />} />
-            <Route
-              exact
-              path="/login-success"
-              element={<SuccessfulLogin alertProps={alertPropsState} eventType={eventTypeState} />}
-            />
             <Route exact path="/favourites" element={<Favourites />} />
             <Route exact path="/location/:id" element={<LocationDetail />} />
           </Route>

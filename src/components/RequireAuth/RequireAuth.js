@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 const RequireAuth = () => {
   const { user, userId, authChecked } = useContext(AuthContext);
+
   const location = useLocation();
 
   console.log(user);

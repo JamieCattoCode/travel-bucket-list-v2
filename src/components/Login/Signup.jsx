@@ -30,12 +30,12 @@ const Signup = ({ setSuccessfulLoginProps, setUserId }) => {
   const [fields, setFields] = useState(initialState.fields);
   const [alertProps, setAlertProps] = useState(initialState.alertProps);
 
-  useEffect(() => {
-    const userToken = Cookie.get('userToken');
-    if (userToken) {
-      navigate('/profile');
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userToken = Cookie.get('userToken');
+  //   if (userToken) {
+  //     navigate('/profile');
+  //   }
+  // }, []);
 
   useEffect(() => {
     const renavigateOnSuccessfulLogin = () => {
