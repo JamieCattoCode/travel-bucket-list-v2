@@ -22,12 +22,12 @@ All API calls were made with Axios.
 ![Opening screen](/src/assets/screenshots/1-Start-page.png)
 ![Empty search page](/src/assets/screenshots/2-Explore-empty.png)
 ![Search page with results](/src/assets/screenshots/3-Search-with-results.png)
-![Details of a particular location](/src/assets/screenshots/4-Location-details.png)
+![Details of a particular location](/src/assets/screenshots/4-location-details.png)
 ![User profile screen](/src/assets/screenshots/5-Profile.png)
 ![Sign in screen](/src/assets/screenshots/6-Sign-in.png)
 ![Sign in with validation alert](/src/assets/screenshots/7-Sign-in-validation.png)
 ![Sign up](/src/assets/screenshots/8-Sign-up.png)
-
+![Favourites page](/src/assets/screenshots/9-favourites.png)
 
 ## Usage
 ### Setting up the backend
