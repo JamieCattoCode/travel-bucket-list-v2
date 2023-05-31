@@ -13,7 +13,6 @@ export const getAllUserFavourites = async (userId) => {
 export const getFavourite = async (userId, placeXid) => {
   try {
     const response = await axios.get(`http://localhost:3001/favourites/single?userid=${userId}&placexid=${placeXid}`);
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

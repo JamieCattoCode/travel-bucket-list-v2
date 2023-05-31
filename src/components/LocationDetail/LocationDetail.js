@@ -48,7 +48,6 @@ const LocationDetail = () => {
     };
 
     const setFavouriteInitialState = async () => {
-      console.log(await getIsFavourite(userId, xid));
       setIsFavourite(await getIsFavourite(userId, xid));
     };
     getLocationDetails();
@@ -58,16 +57,12 @@ const LocationDetail = () => {
   const toggleFavourite = async () => {
     if (!isFavourite) {
       setIsFavourite(true);
-      const responseData = await postFavourite(userId, xid);
-      console.log(responseData);
+      await postFavourite(userId, xid);
     } else {
       setIsFavourite(false);
-      const responseData = await deleteFavourite(userId, xid);
-      console.log(responseData);
+      await deleteFavourite(userId, xid);
     }
   };
-
-  console.log(locationDetails);
 
   return (
     (locationDetails && userId) ? (

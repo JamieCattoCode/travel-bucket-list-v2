@@ -14,4 +14,11 @@ const getLocationByXid = async (xid) => {
   }
 };
 
+export const getLocationNameByXid = async (xid) => {
+  const response = await getLocationByXid(xid);
+  const { data } = response;
+  console.log(data.name);
+  return data.name;
+};
+
 export default getLocationByXid;
