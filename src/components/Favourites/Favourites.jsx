@@ -63,7 +63,7 @@ const Favourites = () => {
       <BackgroundVideo />
       <div className={classes.favouritesContent}>
         <Typography variant="h2" color="white">Favourites</Typography>
-        <Grid className={classes.favouritesGridContainer} container spacing={2}>
+        <Grid className={classes.favouritesGridContainer} container spacing={2} sx={{ marginTop: '3rem' }}>
           {favouritesList.map((favourite) => (
             <Grid item className={classes.favouriteItem} xs={12}>
               <Favourite favouriteObject={favourite} />

@@ -8,10 +8,6 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
   },
 
-  favouritesGridContainer: {
-    marginTop: '20px',
-  },
-
   favouriteItem: {
     display: 'flex',
     justifyContent: 'center',
