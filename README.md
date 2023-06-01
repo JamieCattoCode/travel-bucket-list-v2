@@ -29,6 +29,10 @@ All API calls were made with Axios.
 ![Sign up](/src/assets/screenshots/8-Sign-up.png)
 ![Favourites page](/src/assets/screenshots/9-favourites.png)
 
+## Video Demo
+You can find a video demo of the app working on my LinkedIn page:
+https://www.linkedin.com/posts/jamie-catto-6876421b8_i-was-updating-the-readme-file-for-mine-and-activity-7069628843677949952-pxc7?utm_source=share&utm_medium=member_desktop
+
 ## Usage
 ### Setting up the backend
 1. Clone down the repository of the API found here https://github.com/JamieCattoCode/travel-bucketlist-api
